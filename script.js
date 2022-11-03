@@ -68,15 +68,15 @@ function reset() {
     myLibrary.forEach((book) => displayBook(book));
 }
 
-function remove(e) {
-    index = e.target.getAttribute("remove-index");
-    myLibrary.splice(index, 1);
-    reset();
-}
-
 function changeReadStatus(e) {
     index = e.target.getAttribute("toggle-index");
     myLibrary[index].read = !myLibrary[index].read;
+    reset();
+}
+
+function remove(e) {
+    index = e.target.getAttribute("remove-index");
+    myLibrary.splice(index, 1);
     reset();
 }
 
