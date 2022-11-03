@@ -1,0 +1,45 @@
+body {
+    margin: 0 0;
+}
+
+.container {
+    margin-top: 60px;
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    align-content: center;
+    gap: 40px;
+}
+
+table {
+    border-collapse: collapse;
+    font-family: sans-serif;
+    margin-left: 100px;
+}
+
+thead {
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid black;
+    gap: 0;
+    padding: 5px 20px;
+    width: 125px;
+}
+
+.add-book-form form {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    gap: 10px;
+}
+
+.add-book-form input[type="submit"] {
+    margin-top: 10px;
+    width: 100px;
+    justify-self: center;
+}
+
+td.remove {
+    border: none;
+}
