@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <script src="script.js" defer></script>
-    <script src="validation.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -27,7 +26,7 @@
             <tbody></tbody>
         </table>
         <button class="add-book">Add New Book</button>
-        <form class="hidden"><label for="title">Book Title: </label><input type="text" name="title" id="title" maxlength="100" pattern="[A-Za-z0-9!?:()., ]*"><div class="error"></div><label
+        <form class="hidden"><div><label for="title">Book Title: </label><input type="text" name="title" id="title"><div class="error"></div></div><label
                 for="author">Author: </label><input type="text" name="author" id="author"><div class="error"></div><label for="has-read">Have you
                 read this book?</label><select name="read" id="has-read">
                 <option value="0" selected>No</option>

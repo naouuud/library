@@ -91,9 +91,10 @@ addNewBook.addEventListener("click", () => {
 });
 
 title.addEventListener("input", () => {
-    const isValid = title.checkValidity();
+    const isValid = title.value.length === 0 || (title.value.length <= 10 && /^[A-Za-z0-9!?&$%#@*()\[\]{}|/\\:;., '"-]+$/.test(title.value));
     if (isValid) {
         title.className = "valid";
+        titleError.style.padding = "0px";
         titleError.textContent = "";
     } else {
         title.className = "invalid";
@@ -113,12 +114,16 @@ submit.addEventListener("click", e => {
 });
 
 function showError() {
-    if (title.validity.patternMismatch) {
-        titleError.textContent = "You have used an illegal character";
+    if (!/^[A-Za-z0-9!?&$%#@*()\[\]{}|/\\:;., '"-]+$/.test(title.value)) {
+        titleError.style.padding = "4px";
+        titleError.textContent = "You have used an illegal character.";
+    } else if (!title.value.length <= 10) {
+        titleError.style.padding = "4px";
+        titleError.textContent = "Your title must be less than 10 characters."
     }
 }
 
-// load examples
+// default content
 const theHobbit = new Book("The Hobbit", "Tolkien", false);
 const harryPotter = new Book("Harry Potter and the Prisoner of Azkaban", "JK Rowling", true);
 const dune = new Book("Dune", "Frank Herbert", true);

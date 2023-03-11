@@ -34,8 +34,13 @@ form {
     gap: 10px;
 }
 
+label {
+    display: block;
+}
+
 form input {
     outline: none;
+    width: 180px;
 }
 
 .hidden {
@@ -54,4 +59,12 @@ td.remove {
 
 .invalid {
     border: 2px solid red;
+}
+
+.error {
+    width: 180px;
+    font-size: 14px;
+    background-color: pink;
+    color: red;
+    border-radius: 5px;
 }
