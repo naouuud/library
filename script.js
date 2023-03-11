@@ -7,14 +7,6 @@ class Book {
 }
 
 let myLibrary = [];
-
-const theHobbit = new Book("The Hobbit", "Tolkien", false);
-const harryPotter = new Book("Harry Potter and the Prisoner of Azkaban", "JK Rowling", true);
-const dune = new Book("Dune", "Frank Herbert", true);
-myLibrary.push(theHobbit);
-myLibrary.push(harryPotter);
-myLibrary.push(dune);
-
 let removalIndex = 0;
 let toggleIndex = 0;
 
@@ -82,38 +74,55 @@ function remove(e) {
     reset();
 }
 
-myLibrary.forEach((book) => displayBook(book));
+const addNewBook = document.querySelector(".add-book");
+const form = document.querySelector('form');
+const title = document.querySelector("input#title");
+const titleError = document.querySelector("#title + .error");
+const author = document.querySelector("input#author");
+const authorError = document.querySelector("#author + .error")
+const read = document.querySelector("select#has-read");
+submit = document.querySelector(".submit");
+addNewBook.addEventListener("click", () => {
+    if (form.className === "hidden") {
+        form.className = "visible";
+    } else {
+        form.className = "hidden";
+    }
+});
 
-let submit;
-let addingBook;
-const addBook = document.querySelector(".add-book");
-addBook.addEventListener("click", () => {
-    const container = document.querySelector(".container");
-    const form = document.createElement("div");
-    form.classList.add("add-book-form");
-    form.innerHTML = `<form action="" method="get"><label for="title">Book Title: </label><input type="text" name="title" id="title"><label for="author">Author: </label><input type="text" name="author" id="author"><label for="has-read">Have you read this book?</label><select name="read" id="has-read"><option value="0" selected>No</option><option value="1">Yes</option></select><input type="submit" class="submit"></form>`;
-    if (!addingBook) {
-        container.appendChild(form);
-        addingBook = true;
+title.addEventListener("input", () => {
+    const isValid = title.checkValidity();
+    if (isValid) {
+        title.className = "valid";
+        titleError.textContent = "";
+    } else {
+        title.className = "invalid";
+        showError()
     }
-    else {
-        const form = document.querySelector(".add-book-form");
-        container.removeChild(form);
-        addingBook = false;
+});
+
+submit.addEventListener("click", e => {
+    e.preventDefault();
+    const isValid = title.checkValidity();
+    if (!isValid) showError();
+    // const book = new Book(title.value, author.value, Boolean(parseInt(read.value)));
+    // myLibrary.push(book);
+    // displayBook(book);
+    // title.value = "";
+    // author.value = "";
+});
+
+function showError() {
+    if (title.validity.patternMismatch) {
+        titleError.textContent = "You have used an illegal character";
     }
-    submit = document.querySelector(".submit");
-    if (submit) {
-        submit.addEventListener("click", (e) => {
-            e.preventDefault();
-            let title = document.querySelector("input#title");
-            let author = document.querySelector("input#author");
-            let read = document.querySelector("select#has-read");
-            console.log(read.value);
-            const book = new Book(title.value, author.value, Boolean(parseInt(read.value)));
-            myLibrary.push(book);
-            displayBook(book);
-            title.value = "";
-            author.value = "";
-        })
-    }
-})
+}
+
+// load examples
+const theHobbit = new Book("The Hobbit", "Tolkien", false);
+const harryPotter = new Book("Harry Potter and the Prisoner of Azkaban", "JK Rowling", true);
+const dune = new Book("Dune", "Frank Herbert", true);
+myLibrary.push(theHobbit);
+myLibrary.push(harryPotter);
+myLibrary.push(dune);
+myLibrary.forEach((book) => displayBook(book));

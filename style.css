@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-    margin-top: 60px;
+    margin: 60px 0;
     display: grid;
     grid-template-rows: auto auto;
     justify-items: center;
@@ -28,13 +28,21 @@ td {
     width: 125px;
 }
 
-.add-book-form form {
+form {
     display: grid;
     grid-template-rows: auto auto auto auto;
     gap: 10px;
 }
 
-.add-book-form input[type="submit"] {
+form input {
+    outline: none;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+form input[type="submit"] {
     margin-top: 10px;
     width: 100px;
     justify-self: center;
@@ -42,4 +50,8 @@ td {
 
 td.remove {
     border: none;
+}
+
+.invalid {
+    border: 2px solid red;
 }
