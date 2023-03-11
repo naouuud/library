@@ -104,19 +104,25 @@ title.addEventListener("input", () => {
 
 submit.addEventListener("click", e => {
     e.preventDefault();
-    const isValid = title.checkValidity();
-    if (!isValid) showError();
-    // const book = new Book(title.value, author.value, Boolean(parseInt(read.value)));
-    // myLibrary.push(book);
-    // displayBook(book);
-    // title.value = "";
-    // author.value = "";
+    const isValid = title.value.length <= 10 && /^[A-Za-z0-9!?&$%#@*()\[\]{}|/\\:;., '"-]+$/.test(title.value);
+    if (isValid) {
+        const book = new Book(title.value, author.value, Boolean(parseInt(read.value)));
+        myLibrary.push(book);
+        displayBook(book);
+        title.value = "";
+        author.value = "";
+    } else if (title.value.length === 0) {
+        titleError.style.padding = "4px";
+        titleError.textContent = "You must provide a title.";
+    } else {
+        showError();
+    }
 });
 
 function showError() {
     if (!/^[A-Za-z0-9!?&$%#@*()\[\]{}|/\\:;., '"-]+$/.test(title.value)) {
         titleError.style.padding = "4px";
-        titleError.textContent = "You have used an illegal character.";
+        titleError.textContent = `You cannot use '${title.value.charAt(title.value.length - 1)}'.`;
     } else if (!title.value.length <= 10) {
         titleError.style.padding = "4px";
         titleError.textContent = "Your title must be less than 10 characters."
